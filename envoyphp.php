@@ -12,10 +12,8 @@ curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 //$curl_response = curl_exec($curl);
 $curl_response = curl_exec($curl);
 
-if ($curl_response === false) {
-	$info = curl_getinfo($curl);
-	curl_close($curl);
-	die('Curl error: ' . var_export($info));
+if (curl_error($curl)) {
+	die('Curl error: ' . curl_error($curl));
 }
 
 // later we can see if 200 and log error
@@ -46,7 +44,6 @@ foreach($decoded as $i => $item) {
 	if ($boolVisitorExist === true) {
 		// dont insert again if already exists, and we can goto next visitor
 		echo ("Visitor ID exists: $visitor_id");
-		echo "\n";
 	} elseif ($boolVisitorExist === false) {
 		// insert new visitor
 		echo ("No visitor ID found for $visitor_id, lets insert it");
