@@ -3,7 +3,9 @@
 include "envoyfunctions.php";
 
 $environment = 'dev';
-$logPath	= '/dev/null' ; 
+$logType	= '[envoy]';
+$logPath	= 'c:\devroot\envoy.log' ; 
+
 
 $envoyUrl =	"https://app.envoy.com/api/entries.json?api_key=xxx";
 
