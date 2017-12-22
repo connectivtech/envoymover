@@ -1,6 +1,7 @@
 <?php
 
 include "settings.php";
+include "db_init.php";
 
 logEvent('Envoy mover started');
 
