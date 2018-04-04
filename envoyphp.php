@@ -72,13 +72,28 @@ foreach($decoded as $i => $item) {
 		$visitor_purpose = $aws_mysqli->real_escape_string($decoded[$i]->{'purpose_of_visit'});
 		$email_address = '' ; // define and set later if used
 
-		if ($decoded[$i]->{'purpose_of_visit'} == "I am a prospective member")
+
+// todo - these are not terrible durable for expansion. will need to hard code new location names for fields. 
+		if (
+				($decoded[$i]->{'purpose_of_visit'} == "I am a prospective member")
+				||
+				($decoded[$i]->{'purpose_of_visit'} == "I'm a prospective member")
+			)
 		{
 			echo $decoded[$i]->{'who_will_you_be_meeting_for_a_tour?'} . "\n" ;
 			echo $decoded[$i]->{'your_email_address'} . "\n" ;
 			$member_visited = $aws_mysqli->real_escape_string($decoded[$i]->{'who_will_you_be_meeting_for_a_tour?'});
 			$email_address = $aws_mysqli->real_escape_string($decoded[$i]->{'your_email_address'});
-		} elseif ($decoded[$i]->{'purpose_of_visit'} == "I'm visiting a member") {
+		} elseif (
+					($decoded[$i]->{'purpose_of_visit'} == "I'm here for a meeting")
+				)	 {
+			echo $decoded[$i]->{'who_will_you_be_meeting_with?'} . "\n" ;
+			$member_visited = $aws_mysqli->real_escape_string($decoded[$i]->{'who_will_you_be_meeting_with?'});
+		} elseif (
+					($decoded[$i]->{'purpose_of_visit'} == "I'm visiting a member")
+					||
+					($decoded[$i]->{'purpose_of_visit'} == "I'm a visitor")
+				)	 {
 			echo $decoded[$i]->{'member_you\'re_visiting'} . "\n" ;
 			$member_visited = $aws_mysqli->real_escape_string($decoded[$i]->{'member_you\'re_visiting'});
 		} else {
