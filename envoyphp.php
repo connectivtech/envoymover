@@ -96,8 +96,10 @@ foreach($decoded as $i => $item) {
 				)	 {
 			echo $decoded[$i]->{'member_you\'re_visiting'} . "\n" ;
 			$member_visited = $aws_mysqli->real_escape_string($decoded[$i]->{'member_you\'re_visiting'});
+			$member_visited = $aws_mysqli->real_escape_string($decoded[$i]->{'i\'m_here_to_see:'});
 		} else {
 			echo logEvent("Error: Purpose of visit not expected: " . $decoded[$i]->{'purpose_of_visit'} );
+
 		}
 
 		$photo_url = $aws_mysqli->real_escape_string($decoded[$i]->{'photo_url'});
